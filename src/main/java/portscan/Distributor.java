@@ -3,7 +3,18 @@ package portscan;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @descrption This class is for tasks distribution
+ */
 public class Distributor {
+
+    /**
+     *
+     * @param tasks task list
+     * @param threadCount number
+     * @return perWorkingThreadTasks a list contains each thread`s task list
+     */
     public static List[] distributeTask (List tasks, int threadCount) {
         int minTaskNumber = tasks.size() / threadCount;
         int remainingNumber = tasks.size() % threadCount;

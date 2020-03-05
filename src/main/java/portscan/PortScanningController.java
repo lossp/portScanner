@@ -27,7 +27,6 @@ public class PortScanningController {
                 int initialPortNumber = Integer.parseInt(br1.readLine());
                 List<PortScanningTask> portTasks = new ArrayList<>();
                 for (int i = 0; i < initialPortNumber; i++) {
-                    System.out.println("基本");
                     portTasks.add(new PortScanningTask(i, i, ipAddress));
                 }
                 int threadCount = 10;
