@@ -25,6 +25,10 @@ public class PortScanningTask {
         this.ipAddress = ipAddress;
     }
 
+    public int getPort() {
+        return this.port;
+    }
+
     /**
      * set the status, 0 for ready, 1 for running, 2 for finished
      * @param status
@@ -36,17 +40,20 @@ public class PortScanningTask {
     /**
      * initiate the scanning task, see if the ip`s port is open
      * it needs no params, just to check this class`s port and ip address
+     * returns true if the port is open
      */
-    public void execute() {
+    public boolean execute() {
         setStatus(PortScanningTask.RUNNING);
-        System.out.println("线程id为" + Thread.currentThread().getName() + " 任务ID为" + this.taskId);
+//        System.out.println("线程id为" + Thread.currentThread().getName() + " 任务ID为" + this.taskId);
         try {
-            isConnected(this.port);
-            Thread.sleep(1);
+            boolean isOpen = isConnected(this.port);
+            Thread.sleep(500);
+            return isOpen;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         setStatus(PortScanningTask.FINISHED);
+        return false;
     }
 
     /**
@@ -61,13 +68,15 @@ public class PortScanningTask {
      * This method is decorated as private method. it`s only used within this class, to see if the port is open.
      * @param port the certain port
      */
-    private void isConnected(int port) {
+    private boolean isConnected(int port) {
         try {
             Socket socket = new Socket(this.ipAddress, port);
             socket.close();
-            System.out.println("此时端口: " + port + "状态为打开");
+//            System.out.println("此时端口: " + port + "状态为打开");
+            return true;
         } catch (IOException e) {
-            System.out.println("此时端口: " + port + "状态为关闭");
+//            System.out.println("此时端口: " + port + "状态为关闭");
+            return false;
         }
 
     }

@@ -1,8 +1,10 @@
 package portscan;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
-public class PortScanningThread implements Runnable {
+public class PortScanningThread implements Callable<List<Integer>> {
 
     private List<PortScanningTask> tasks = null;
     private int threadId;
@@ -23,13 +25,11 @@ public class PortScanningThread implements Runnable {
         this.threadId = threadId;
     }
 
-    /**
-     * start each one of the port scan task
-     */
-    @Override
-    public void run() {
-        for (PortScanningTask task : tasks) {
-            task.execute();
+    public List<Integer> call() {
+        final List<Integer> list = new ArrayList<>();
+        for (PortScanningTask task:tasks) {
+            if (task.execute()) list.add(task.getPort());
         }
+        return list;
     }
 }
