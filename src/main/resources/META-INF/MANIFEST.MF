@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: ./target/lossp-1.0-SNAPSHOT.jar
+Main-Class: portscan.PortScanningController
+Name: java/util/

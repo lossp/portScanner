@@ -32,3 +32,8 @@ If you have any better idea, feel free to modify it.
 PS: I replace the Thread from Runnable into Callable. Only in that way can we get the execution result from every thread.
 Runnable interface defined the run() method, which returns void. While the Callable`s call() method returning a generics type. In that way, we can do anything about the data we gather from each thread, which is more convenient.
 But we have to add some more feature to the thread, for example, what will we do if one thread is down during the working? In the next phase, CompletionService will solve this problem
+
+
+# Instructions
+1. Run command `mvn clean package`
+2. Run command `java -jar target/lossp-1.0-SNAPSHOT.jar`
